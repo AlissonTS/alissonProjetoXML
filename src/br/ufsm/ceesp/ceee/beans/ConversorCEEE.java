@@ -36,8 +36,8 @@ public class ConversorCEEE {
 
             Document doc = builder.parse(arquivo);
 
-            NodeList listaData = doc.getElementsByTagName("DATE");
-
+            // NodeList listaData = doc.getElementsByTagName("DATE");
+            /*
             int tamanhoLista = listaData.getLength();
 
             for(int i=0; i<tamanhoLista; i++){
@@ -55,6 +55,53 @@ public class ConversorCEEE {
 
                     System.out.println("Day: "+day+", Month: "+month+", Year: "+year);
                 }
+            } */
+
+            NodeList listaTRF = doc.getElementsByTagName("TRF");
+
+            int tamanhoLista = listaTRF.getLength();
+
+            for(int i=0; i<tamanhoLista; i++){
+
+                Node noTRF = listaTRF.item(i);
+
+                if(noTRF.getNodeType() == Node.ELEMENT_NODE){
+
+                    Element elementoTRF = (Element) noTRF;
+
+                    String id = elementoTRF.getAttribute("id");
+
+                    NodeList listaDeFilhosTRF = elementoTRF.getChildNodes();
+
+                    int tamanhoListaFilho = listaDeFilhosTRF.getLength();
+
+                    System.out.println("-------------------");
+                    System.out.println("ID do Trafo: "+id);
+                    for(int j=0; j<tamanhoListaFilho; j++){
+
+                        Node noFilho = listaDeFilhosTRF.item(j);
+
+                        if(noFilho.getNodeType() == Node.ELEMENT_NODE){
+
+                            Element elementoFilho = (Element) noFilho;
+
+                            String idConsumidor = elementoFilho.getAttribute("id");
+                            String desc = elementoFilho.getAttribute("dscr");
+                            String gp = elementoFilho.getAttribute("group");
+                            String sgp = elementoFilho.getAttribute("subgroup");
+                            String cl = elementoFilho.getAttribute("class");
+                            String cat = elementoFilho.getAttribute("category");
+
+                            System.out.println("");
+                            System.out.println("CNS: id: "+idConsumidor+", Desc: "+desc+", GP: "+gp+", SGP: "+sgp+", " +
+                                    "Class: "+cl+", Category: "+cat);
+
+
+                        }
+                    }
+                    System.out.println("--------------------");
+                }
+
             }
 
         } catch (ParserConfigurationException e) {
