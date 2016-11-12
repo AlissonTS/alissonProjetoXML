@@ -96,7 +96,22 @@ public class ConversorCEEE {
                             System.out.println("CNS: id: "+idConsumidor+", Desc: "+desc+", GP: "+gp+", SGP: "+sgp+", " +
                                     "Class: "+cl+", Category: "+cat);
 
+                            NodeList listaDeFilhosCNS = noFilho.getChildNodes();
 
+                            for(int k=0; k<listaDeFilhosCNS.getLength(); k++){
+
+                                Node noFilhoCNS = listaDeFilhosCNS.item(k);
+
+                                if(noFilhoCNS.getNodeType() == Node.ELEMENT_NODE){
+                                    Element elementoFilhoCNS = (Element) noFilhoCNS;
+
+                                    String tp = elementoFilhoCNS.getAttribute("type");
+                                    String vl = elementoFilhoCNS.getAttribute("value");
+
+                                    System.out.println("");
+                                    System.out.println("MED: type: "+tp+", Value: "+vl);
+                                }
+                            }
                         }
                     }
                     System.out.println("--------------------");
