@@ -36,27 +36,6 @@ public class ConversorCEEE {
 
             Document doc = builder.parse(arquivo);
 
-            // NodeList listaData = doc.getElementsByTagName("DATE");
-            /*
-            int tamanhoLista = listaData.getLength();
-
-            for(int i=0; i<tamanhoLista; i++){
-
-                Node noData = listaData.item(i);
-
-                if(noData.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element elementoData = (Element) noData;
-
-                    // day="17" month="08" year="2016"
-                    String day = elementoData.getAttribute("day");
-                    String month = elementoData.getAttribute("month");
-                    String year = elementoData.getAttribute("year");
-
-                    System.out.println("Day: "+day+", Month: "+month+", Year: "+year);
-                }
-            } */
-
             NodeList listaTRF = doc.getElementsByTagName("TRF");
 
             int tamanhoLista = listaTRF.getLength();
@@ -110,6 +89,33 @@ public class ConversorCEEE {
 
                                     System.out.println("");
                                     System.out.println("MED: type: "+tp+", Value: "+vl);
+
+                                    NodeList listaDeFilhosMED = noFilhoCNS.getChildNodes();
+
+                                    for(int l=0; l<listaDeFilhosMED.getLength(); l++){
+
+                                        Node noFilhoMED = listaDeFilhosMED.item(l);
+
+                                        if(noFilhoMED.getNodeType() == Node.ELEMENT_NODE){
+                                            // Element elementoFilhoMED = (Element) noFilhoMED;
+
+                                            NodeList listaDeFilhosCRV = noFilhoMED.getChildNodes();
+
+                                            for(int h=0; h<listaDeFilhosCRV.getLength(); h++){
+
+                                                Node noFilhoCRV = listaDeFilhosCRV.item(h);
+
+                                                if(noFilhoCRV.getNodeType() == Node.ELEMENT_NODE){
+                                                    Element elementoFilhoCRV = (Element) noFilhoCRV;
+
+                                                    String p = elementoFilhoCRV.getAttribute("p");
+                                                    String q = elementoFilhoCRV.getAttribute("q");
+
+                                                    System.out.println("P: "+p+", Q: "+q);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
