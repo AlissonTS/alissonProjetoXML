@@ -50,15 +50,11 @@ public class ConversorCEEE {
 
                 Node noTRF = listaTRF.item(i);
 
-                Importador imp = new Importador();
-
                 if(noTRF.getNodeType() == Node.ELEMENT_NODE){
 
                     Element elementoTRF = (Element) noTRF;
 
                     String id = elementoTRF.getAttribute("id");
-
-                    imp.setIdTrafo(Integer.parseInt(id));
 
                     NodeList listaDeFilhosTRF = elementoTRF.getChildNodes();
 
@@ -67,6 +63,10 @@ public class ConversorCEEE {
                     // System.out.println("-------------------");
                     // System.out.println("ID do Trafo: "+id);
                     for(int j=0; j<tamanhoListaFilho; j++){
+
+                        Importador imp = new Importador();
+
+                        imp.setIdTrafo(Integer.parseInt(id));
 
                         Node noFilho = listaDeFilhosTRF.item(j);
 
@@ -147,8 +147,8 @@ public class ConversorCEEE {
                                 }
                             }
                         }
+                        listaImp.add(imp);
                     }
-                    listaImp.add(imp);
                     // System.out.println("--------------------");
                 }
             }
@@ -173,11 +173,11 @@ public class ConversorCEEE {
                 String horaFormatada = gd.horaFormatada();
                 String dataFormatadaReferencia = gd.dataFormatadaReferencia();
 
-                fw.write("PRI;\r\n");
-                fw.write(dataFormatada+" "+horaFormatada+"- v2.89;\r\n");
-                fw.write("DATA DE REFERÊNCIA = "+dataFormatadaReferencia+";\r\n");
+                // fw.write("PRI;\r\n");
+                fw.write(dataFormatada+" "+horaFormatada+";\r\n");
+                // fw.write("DATA DE REFERÊNCIA = "+dataFormatadaReferencia+";\r\n");
 
-                fw.write("VER;\r\n4.0;\r\n\r\n");
+                fw.write("VER;\r\n1.0;\r\n\r\n");
 
                 fw.write("CONSUMIDOR;\r\n");
                 for(int i=0; i<listaImp.size(); i++){
