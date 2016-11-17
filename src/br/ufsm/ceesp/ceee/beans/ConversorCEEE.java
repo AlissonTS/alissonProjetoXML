@@ -60,6 +60,7 @@ public class ConversorCEEE {
 
                     int tamanhoListaFilho = listaDeFilhosTRF.getLength();
 
+                    // System.out.println("Trafo ID: "+elementoTRF.getAttribute("id")+" - Numero de Consumidores: "+tamanhoListaFilho);
                     // System.out.println("-------------------");
                     // System.out.println("ID do Trafo: "+id);
                     for(int j=0; j<tamanhoListaFilho; j++){
@@ -182,7 +183,7 @@ public class ConversorCEEE {
                 fw.write("CONSUMIDOR;\r\n");
                 for(int i=0; i<listaImp.size(); i++){
                     if(listaImp.get(i).getIdConsumidor()>0){
-                        fw.write(listaImp.get(i).getIdConsumidor()+";\t "+listaImp.get(i).getIdTrafo()+";\t "
+                        fw.write(listaImp.get(i).getIdConsumidor()+";\t PAL - "+listaImp.get(i).getIdTrafo()+";\t "
                                 +listaImp.get(i).getGrupo()+";\t "+listaImp.get(i).getDesc()
                                 +";\t "+listaImp.get(i).getSubGrupo()+";\t "+listaImp.get(i).getCategoria()+";\t "
                                 +listaImp.get(i).getTipoMed()+";\t "+listaImp.get(i).getValor()+";\r\n");
