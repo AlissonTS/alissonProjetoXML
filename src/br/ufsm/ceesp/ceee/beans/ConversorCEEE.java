@@ -174,9 +174,9 @@ public class ConversorCEEE {
                 String horaFormatada = gd.horaFormatada();
                 String dataFormatadaReferencia = gd.dataFormatadaReferencia();
 
-                // fw.write("PRI;\r\n");
-                fw.write(dataFormatada+" "+horaFormatada+";\r\n");
-                // fw.write("DATA DE REFERÊNCIA = "+dataFormatadaReferencia+";\r\n");
+                fw.write("PRI;\r\n");
+                fw.write(dataFormatada+" "+horaFormatada+"- v2.89;\r\n");
+                fw.write("DATA DE REFERÊNCIA = "+dataFormatadaReferencia+";\r\n");
 
                 fw.write("VER;\r\n1.0;\r\n\r\n");
 
@@ -185,17 +185,29 @@ public class ConversorCEEE {
                     if(listaImp.get(i).getIdConsumidor()>0){
                         fw.write(listaImp.get(i).getIdConsumidor()+";\t PAL - "+listaImp.get(i).getIdTrafo()+";\t "
                                 +listaImp.get(i).getGrupo()+";\t "+listaImp.get(i).getDesc()
-                                +";\t "+listaImp.get(i).getSubGrupo()+";\t "+listaImp.get(i).getCategoria()+";\t "
+                                +";\t "+listaImp.get(i).getSubGrupo()+";\t "+listaImp.get(i).getClasse()+";\t "+listaImp.get(i).getCategoria()+";\t "
                                 +listaImp.get(i).getTipoMed()+";\t "+listaImp.get(i).getValor()+";\r\n");
                     }
                 }
                 fw.write("CURVA;\r\n");
-                for(int i=0; i<listaImp.size(); i++){
+                /* for(int i=0; i<listaImp.size(); i++){
                     if(listaImp.get(i).getIdConsumidor()>0){
                         for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
                             fw.write(listaImp.get(i).getIdConsumidor()+";\t "+listaImp.get(i).getCurva().get(j).getP()
                                     +"; \t"+listaImp.get(i).getCurva().get(j).getQ()+";\r\n");
                         }
+                    }
+                } */
+                for(int i=0; i<listaImp.size(); i++){
+                    if(listaImp.get(i).getIdConsumidor()>0){
+                        for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
+                            if(j==0){
+                                fw.write(listaImp.get(i).getIdConsumidor()+"");
+                            }
+                            fw.write(";\t"+listaImp.get(i).getCurva().get(j).getP()
+                                    +"; \t"+listaImp.get(i).getCurva().get(j).getQ());
+                        }
+                        fw.write(";\r\n");
                     }
                 }
 
