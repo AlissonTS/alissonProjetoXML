@@ -199,7 +199,7 @@ public class ConversorCEEE {
                     }
                 } */
                 for(int i=0; i<listaImp.size(); i++){
-                    if(listaImp.get(i).getIdConsumidor()>0){
+                    if(listaImp.get(i).getIdConsumidor()>0 && listaImp.get(i).getCurva().size()>0){
                         for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
                             if(j==0){
                                 fw.write(listaImp.get(i).getIdConsumidor()+"");
