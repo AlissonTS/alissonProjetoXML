@@ -106,7 +106,7 @@ public class ConversorCEEE {
                                     String vl = elementoFilhoCNS.getAttribute("value");
 
                                     imp.setTipoMed(tp);
-                                    imp.setValor(Double.parseDouble(vl));
+                                    imp.setValor(new Double(vl.replace(',', '.')));
 
                                     // System.out.println("");
                                     // System.out.println("MED: type: "+tp+", Value: "+vl);
@@ -182,17 +182,15 @@ public class ConversorCEEE {
 
                 fw.write("CONSUMIDOR;\r\n");
                 for(int i=0; i<listaImp.size(); i++){
-                    if(listaImp.get(i).getIdConsumidor()>0){
+                    if(listaImp.get(i).getIdConsumidor()>0 && listaImp.get(i).getCurva().size()>0){
                         fw.write(listaImp.get(i).getIdConsumidor()+";\t PAL - "+listaImp.get(i).getIdTrafo()+";\t "
                                 +listaImp.get(i).getGrupo()+";\t "+listaImp.get(i).getDesc()
                                 +";\t "+listaImp.get(i).getSubGrupo()+";\t "+listaImp.get(i).getClasse()+";\t "+listaImp.get(i).getCategoria()+";\t "
-                                +listaImp.get(i).getTipoMed()+";\t "+listaImp.get(i).getValor()+";");
+                                +listaImp.get(i).getTipoMed()+";\t "+Double.toString(listaImp.get(i).getValor()).replace('.', ',')+";");
 
-                        if(listaImp.get(i).getCurva().size()>0){
-                            for(int j=0; j<listaImp.get(i).getCurva().size(); j++) {
-                                fw.write("\t" + Double.toString(listaImp.get(i).getCurva().get(j).getP()).replace('.', ',')
-                                        + "; \t" + Double.toString(listaImp.get(i).getCurva().get(j).getQ()).replace('.', ',')+";");
-                            }
+                        for(int j=0; j<listaImp.get(i).getCurva().size(); j++) {
+                            fw.write("\t" + Double.toString(listaImp.get(i).getCurva().get(j).getP()).replace('.', ',')
+                                    + "; \t" + Double.toString(listaImp.get(i).getCurva().get(j).getQ()).replace('.', ',')+";");
                         }
                         fw.write("\r\n");
                     }
