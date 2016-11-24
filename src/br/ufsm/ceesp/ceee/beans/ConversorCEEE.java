@@ -186,18 +186,26 @@ public class ConversorCEEE {
                         fw.write(listaImp.get(i).getIdConsumidor()+";\t PAL - "+listaImp.get(i).getIdTrafo()+";\t "
                                 +listaImp.get(i).getGrupo()+";\t "+listaImp.get(i).getDesc()
                                 +";\t "+listaImp.get(i).getSubGrupo()+";\t "+listaImp.get(i).getClasse()+";\t "+listaImp.get(i).getCategoria()+";\t "
-                                +listaImp.get(i).getTipoMed()+";\t "+listaImp.get(i).getValor()+";\r\n");
+                                +listaImp.get(i).getTipoMed()+";\t "+listaImp.get(i).getValor()+";");
+
+                        if(listaImp.get(i).getCurva().size()>0){
+                            for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
+                                fw.write("\t"+listaImp.get(i).getCurva().get(j).getP()
+                                        +"; \t"+listaImp.get(i).getCurva().get(j).getQ());
+                            }
+                            fw.write(";\r\n");
+                        }
                     }
                 }
-                fw.write("CURVA;\r\n");
-                /* for(int i=0; i<listaImp.size(); i++){
+                /* fw.write("CURVA;\r\n");
+                for(int i=0; i<listaImp.size(); i++){
                     if(listaImp.get(i).getIdConsumidor()>0){
                         for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
                             fw.write(listaImp.get(i).getIdConsumidor()+";\t "+listaImp.get(i).getCurva().get(j).getP()
                                     +"; \t"+listaImp.get(i).getCurva().get(j).getQ()+";\r\n");
                         }
                     }
-                } */
+                }
                 for(int i=0; i<listaImp.size(); i++){
                     if(listaImp.get(i).getIdConsumidor()>0 && listaImp.get(i).getCurva().size()>0){
                         for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
@@ -209,7 +217,7 @@ public class ConversorCEEE {
                         }
                         fw.write(";\r\n");
                     }
-                }
+                } */
 
                 fw.write("END;\r\n");
 
