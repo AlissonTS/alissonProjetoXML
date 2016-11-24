@@ -134,8 +134,8 @@ public class ConversorCEEE {
                                                     String q = elementoFilhoCRV.getAttribute("q");
 
                                                     Curva curva = new Curva();
-                                                    curva.setP(Double.parseDouble(p));
-                                                    curva.setQ(Double.parseDouble(q));
+                                                    curva.setP(new Double(p.replace(',', '.')));
+                                                    curva.setQ(new Double(q.replace(',', '.')));
 
                                                     lista.add(curva);
 
@@ -189,12 +189,12 @@ public class ConversorCEEE {
                                 +listaImp.get(i).getTipoMed()+";\t "+listaImp.get(i).getValor()+";");
 
                         if(listaImp.get(i).getCurva().size()>0){
-                            for(int j=0; j<listaImp.get(i).getCurva().size(); j++){
-                                fw.write("\t"+listaImp.get(i).getCurva().get(j).getP()
-                                        +"; \t"+listaImp.get(i).getCurva().get(j).getQ());
+                            for(int j=0; j<listaImp.get(i).getCurva().size(); j++) {
+                                fw.write("\t" + Double.toString(listaImp.get(i).getCurva().get(j).getP()).replace('.', ',')
+                                        + "; \t" + Double.toString(listaImp.get(i).getCurva().get(j).getQ()).replace('.', ',')+";");
                             }
-                            fw.write(";\r\n");
                         }
+                        fw.write("\r\n");
                     }
                 }
                 /* fw.write("CURVA;\r\n");
